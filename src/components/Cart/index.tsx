@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { RootStore } from '../../store';
 import { CartContainer } from './styles';
 import { useDispatch } from 'react-redux'
-import { decrementCart, incrementCart, removeCart } from '../../store/modules/pokemon';
+import { decrementCart, incrementCart, removeCart, clearCart } from '../../store/modules/pokemon';
 import { Pokemon } from '../../types/pokemon';
 import Modal from '../Modal';
 
@@ -31,13 +31,18 @@ function Cart() {
     }
   }
 
-  const handleModal = () => {
-    setUseModal(!useModal);
+  const openModal = () => {
+    setUseModal(true);
+  }
+  
+  const closeModal = async() => {
+    setUseModal(false);
+    await dispatch(clearCart());
   }
 
   return (
     <CartContainer>
-      <div className='container-title'>Carrinho</div>
+      <div className='container-title'>Carrinho {pokemons.length > 0 && <span className='clear-cart' onClick={() => dispatch(clearCart())}>Limpar</span>}</div>
       <div className='container-item'>
         {pokemons.map(data => (
           <div key={data.id} className='item'>
@@ -58,8 +63,8 @@ function Cart() {
         <span>TOTAL</span>
         <span>R${totalCart},00</span>
       </div>
-      <button className='container-finish' onClick={() => handleModal()} disabled={pokemons.length === 0 ? true : false}>Finalizar</button>
-      {useModal && pokemons.length > 0 && <Modal closeModal={() => handleModal()}/>}
+      <button className='container-finish' onClick={() => openModal()} disabled={pokemons.length === 0 ? true : false}>Finalizar</button>
+      {useModal && pokemons.length > 0 && <Modal closeModal={() => closeModal()}/>}
     </CartContainer>
   )
 }

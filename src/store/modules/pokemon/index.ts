@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { Pokemon, PokemonReduce } from '../../../types/pokemon';
+import { Pokemon } from '../../../types/pokemon';
 
 const searchState = (state:Pokemon[], id:number) => {
   return state.findIndex((st) => st.id === id) as number;
@@ -30,9 +30,12 @@ const pokemonReduce = createSlice({
     decrementCart(state, action){
       const index = searchState(state, action.payload.id);
       state[index].amount--;
+    },
+    clearCart(state){
+     return state = []
     }
   }
 })
 
-export const {addCart, removeCart, incrementCart, decrementCart} = pokemonReduce.actions;
+export const {addCart, removeCart, incrementCart, decrementCart, clearCart} = pokemonReduce.actions;
 export default pokemonReduce.reducer

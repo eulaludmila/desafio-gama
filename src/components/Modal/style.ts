@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 export const ContainerModal = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(0,0,0,0.8);
   display: flex;
   justify-content: center;

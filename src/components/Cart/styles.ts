@@ -24,6 +24,15 @@ export const CartContainer = styled.div`
     color: #fff;
     font-size: 24px;
     font-weight: 600;
+    position: relative;
+
+    .clear-cart{
+      position: absolute;
+      right: 5px;
+      top: 9px;
+      font-size: 14px;
+      cursor: pointer;
+    }
   }
 
   .container-item{
